@@ -1,19 +1,14 @@
 #include <Arduino.h>
-
+#define LED 7
 // put function declarations here:
-int myFunction(int, int);
-
 void setup() {
   // put your setup code here, to run once:
-  int result = myFunction(2, 3);
-  Serial.print('ldks');
+  pinMode(LED , OUTPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  digitalWrite(LED , HIGH);//turn the LED On by making the voltage HIGH
+  delay(500);                       // wait half a second
+  digitalWrite(LED , LOW);// turn the LED Off by making the voltage LOW
+  delay(500);   
 }
