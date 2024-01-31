@@ -8,6 +8,8 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 int lcd_key     = 0;
 int adc_key_in  = 0;
 int menu = 0;
+bool buttonPressed = false;
+
 #define btnRIGHT  0
 #define btnUP     1
 #define btnDOWN   2
@@ -47,15 +49,26 @@ void loop()
 
 
   lcd_key = read_LCD_buttons();  // read the buttons
-  if (lcd_key = btnUP){
+  if (lcd_key == btnUP && !buttonPressed){
     menu += 1;
+    buttonPressed = true;
   }
-  else if (lcd_key = btnDOWN){
-    menu += -1;
+  else if (lcd_key == btnDOWN && !buttonPressed){
+    menu -= 1;
+    buttonPressed = true;
   }
-  
-  lcd.setCursor(9,1);            // move cursor to second line "1" and 9 spaces over
-  lcd.print(menu);      // display seconds elapsed since power-up
+
+  else if (lcd_key == btnNONE) {
+    buttonPressed = false;
+  }
+
+  if(menu > 0){
+    lcd.setCursor(9,1); 
+  }
+  else
+    lcd.setCursor(8,1);            // move cursor to second line "1" and 9 spaces over 
+
+  lcd.print(menu);
 
   lcd.setCursor(0,1);            // move to the begining of the second line
   switch (lcd_key)               // depending on which button was pushed, we perform an action
