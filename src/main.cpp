@@ -17,7 +17,8 @@ int adc_key_in  = 0;
 // read the buttonsss
 int read_LCD_buttons()
 {
-  adc_key_in = analogRead(0);      // read the value from the sensor 
+  adc_key_in = analogRead(0);      // read the value from the sensor
+  Serial.println(adc_key_in);
   // my buttons when read are centered at these valies: 0, 144, 329, 504, 741
   // we add approx 50 to those values and check to see if we are close
   if (adc_key_in > 1500) return btnNONE; // We make this the 1st option for speed reasons since it will be the most likely result
@@ -25,16 +26,17 @@ int read_LCD_buttons()
   if (adc_key_in < 195)  return btnUP; 
   if (adc_key_in < 380)  return btnDOWN; 
   if (adc_key_in < 500)  return btnLEFT; 
-  if (adc_key_in < 700)  return btnSELECT;   
+  if (adc_key_in < 750)  return btnSELECT;   
   return btnNONE;  // when all others fail, return this...
 }
 
 
 void setup()
 {
+  Serial.begin(9600);
   lcd.begin(16, 2);              // start the library
   lcd.setCursor(0,0);
-  lcd.print("Push the buttons"); // print a simple message
+  lcd.print("Masse: "); // print a simple message
 }
 
 
@@ -80,4 +82,4 @@ void loop()
       break;
       }
   }
-  }  
+  }
