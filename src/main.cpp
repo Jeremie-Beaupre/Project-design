@@ -7,6 +7,7 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 // define some values used by the panel and buttons
 int lcd_key     = 0;
 int adc_key_in  = 0;
+int menu = 0;
 #define btnRIGHT  0
 #define btnUP     1
 #define btnDOWN   2
@@ -40,13 +41,21 @@ void setup()
 
 void loop()
 {
-  lcd.setCursor(9,1);            // move cursor to second line "1" and 9 spaces over
-  lcd.print(millis()/1000);      // display seconds elapsed since power-up
 
+
+
+  lcd_key = read_LCD_buttons();  // read the buttons
+  if (lcd_key = btnUP){
+    menu += 1;
+  }
+  else if (lcd_key = btnDOWN){
+    menu += -1;
+  }
+  
+  lcd.setCursor(9,1);            // move cursor to second line "1" and 9 spaces over
+  lcd.print(menu);      // display seconds elapsed since power-up
 
   lcd.setCursor(0,1);            // move to the begining of the second line
-  lcd_key = read_LCD_buttons();  // read the buttons
-
   switch (lcd_key)               // depending on which button was pushed, we perform an action
   {
     case btnRIGHT:
