@@ -39,22 +39,27 @@ void setup()
   Serial.begin(9600);
   lcd.begin(16, 2);              // start the library
   lcd.setCursor(0,0);
-  lcd.print("Masse: "); // print a simple message
+
+  lcd.print("Superbe Balance "); // print a simple message
 }
 
 
 void loop()
 {
-
-
-
+//Debut du menu
   lcd_key = read_LCD_buttons();  // read the buttons
   if (lcd_key == btnUP && !buttonPressed){
     menu += 1;
+    if (menu == 6){
+      menu = 1;
+    }
     buttonPressed = true;
   }
   else if (lcd_key == btnDOWN && !buttonPressed){
     menu -= 1;
+    if (menu <= 0){
+      menu = 5;
+    }
     buttonPressed = true;
   }
 
@@ -62,46 +67,86 @@ void loop()
     buttonPressed = false;
   }
 
-  if(menu > 0){
+  lcd.setCursor(8,1);
+  if(menu >= 0){
+    lcd.setCursor(8,1);
+    //lcd.print(" ");
     lcd.setCursor(9,1); 
   }
-  else
-    lcd.setCursor(8,1);            // move cursor to second line "1" and 9 spaces over 
-
-  lcd.print(menu);
-
-  lcd.setCursor(0,1);            // move to the begining of the second line
-  switch (lcd_key)               // depending on which button was pushed, we perform an action
+  //else
+  //  lcd.setCursor(8,1);           
+  //
+  //lcd.print(menu);
+  //lcd.print(" "); 
+//Fin du menu
+lcd.setCursor(0,1);
+switch (menu)               // depending on which button was pushed, we perform an action
   {
-    case btnRIGHT:
+    case 0:
       {
-      lcd.print("RIGHT ");
+      lcd.print("Initialisation");
       break;
       }
-    case btnLEFT:
+    case 1:
       {
-      lcd.print("LEFT   ");
+      lcd.print("Poid (g):        ");
       break;
       }
-    case btnUP:
+    case 2:
       {
-      lcd.print("UP    ");
+      lcd.print("Poid (oz):         ");
       break;
       }
-    case btnDOWN:
+    case 3:
       {
-      lcd.print("DOWN  ");
+      lcd.print("Poid (slug):        ");
       break;
       }
-    case btnSELECT:
+    case 4:
       {
-      lcd.print("SELECT");
+      lcd.print("Nbr. de piece:      ");
       break;
       }
-      case btnNONE:
+      case 5:
       {
-      lcd.print("NONE  ");
+      lcd.print("Auto destruction     ");
       break;
       }
   }
-  }
+}
+//
+  // lcd.setCursor(0,1);            // move to the begining of the second line
+  // switch (lcd_key)               // depending on which button was pushed, we perform an action
+  // {
+  //   case btnRIGHT:
+  //     {
+  //     lcd.print("RIGHT ");
+  //     break;
+  //     }
+  //   case btnLEFT:
+  //     {
+  //     lcd.print("LEFT   ");
+  //     break;
+  //     }
+  //   case btnUP:
+  //     {
+  //     lcd.print("UP    ");
+  //     break;
+  //     }
+  //   case btnDOWN:
+  //     {
+  //     lcd.print("DOWN  ");
+  //     break;
+  //     }
+  //   case btnSELECT:
+  //     {
+  //     lcd.print("SELECT");
+  //     break;
+  //     }
+  //     case btnNONE:
+  //     {
+  //     lcd.print("NONE  ");
+  //     break;
+  //     }
+  // }
+  // }
