@@ -40,7 +40,7 @@ void loop()
   //Asservissement de la balance
   position_lame = map(analogRead(PIN_in_position), 0, 1024, 0, 255); //position de la lame
   erreur = consigne - position_lame; //erreur de la position de la lame 
-  volt_solenoide = pid(erreur, kp, ki, kd); //Tension a fournir au solenoide
+  volt_solenoide = pid(erreur, kp, ki, kd); //tension a fournir au solenoide
   Serial.println(volt_solenoide);
   //Changer le menu affiché
   lcd_key = read_LCD_buttons();
