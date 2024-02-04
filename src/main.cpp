@@ -15,21 +15,18 @@ int PIN_in_position = A15;
 int PIN_out_solenoide = 53;
 
 //variable pour le PID 
-float dt, temps_0, temps_1;
-float integral, erreur_precedente, output = 0;
-float kp, ki, kd;
-float consigne = 75.00;
-float erreur = 0;
+float kp = 12;
+float ki = 12;
+float kd = 12;
+float consigne = 0;
+float position_lame;
+float erreur;
 float volt_solenoide;
 
 
 
 void setup()
 {
-  kp = 12;
-  ki = 12;
-  kd = 12;
-  temps_0 = 0;
   Serial.begin(9600);
   analogWrite(PIN_out_solenoide, 0);
   lcd.begin(16, 2);             
@@ -41,9 +38,10 @@ void setup()
 void loop()
 {
   //Asservissement de la balance
-  erreur = analogRead(PIN_in_position); //erreur de la position de la lame 
-  volt_solenoide = pid(erreur); //Tension a fournir au solenoide
-  Serial.println(output);
+  position_lame = map(analogRead(PIN_in_position), 0, 1024, 0, 255); //position de la lame
+  erreur = consigne - position_lame; //erreur de la position de la lame 
+  volt_solenoide = pid(erreur, kp, ki, kd); //Tension a fournir au solenoide
+  Serial.println(volt_solenoide);
   //Changer le menu affiché
   lcd_key = read_LCD_buttons();
   choose_menu(menu, lcd_key, buttonPressed);
