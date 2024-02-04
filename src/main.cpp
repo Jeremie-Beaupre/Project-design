@@ -9,15 +9,6 @@ int menu = 0;
 int lcd_key;
 bool buttonPressed = false;
 
-
-#define btnRIGHT  0
-#define btnUP     1
-#define btnDOWN   2
-#define btnLEFT   3
-#define btnSELECT 4
-#define btnNONE   5
-
-
 void setup()
 {
   Serial.begin(9600);
@@ -29,6 +20,7 @@ void setup()
 
 void loop()
 {
+  //Changer le menu affiché
   lcd_key = read_LCD_buttons();
   choose_menu(menu, lcd_key, buttonPressed);
   lcd.setCursor(0,1);

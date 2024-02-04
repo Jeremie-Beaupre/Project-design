@@ -11,7 +11,7 @@
 int adc_key_in  = 0;
 
 
-
+//Détermine si l'utilisateur appuie sur un bouton
 int read_LCD_buttons(){
   adc_key_in = analogRead(0); // read the value from the sensor
   if (adc_key_in > 1500) return btnNONE; // We make this the 1st option for speed reasons since it will be the most likely result
@@ -23,6 +23,7 @@ int read_LCD_buttons(){
   return btnNONE;  // when all others fail, return this...
 }
 
+//Met a jour la valeur menu qui détermine le menu affiché
 void choose_menu(int& menu, int lcd_key, bool& buttonPressed){
   if (lcd_key == btnUP && !buttonPressed){
     menu += 1;
@@ -41,6 +42,5 @@ void choose_menu(int& menu, int lcd_key, bool& buttonPressed){
   else if (lcd_key == btnNONE) {
     buttonPressed = false;
   }
-  Serial.println("fuck");
 }
 
