@@ -12,13 +12,14 @@ bool buttonPressed = false;
 
 //PIN pour le PID
 int PIN_in_position = A15;
-int PIN_out_solenoide = 53;
+int PIN_out_solenoide = 5;
+int PIN_3V = 31;
 
 //variable pour le PID 
 float kp = 12;
-float ki = 12;
-float kd = 12;
-float consigne = 0;
+float ki = 0;
+float kd = 0;
+float consigne = 400;
 float position_lame;
 float erreur;
 float volt_solenoide;
@@ -32,16 +33,17 @@ void setup()
   lcd.begin(16, 2);             
   lcd.setCursor(0,0);
   lcd.print("Superbe Balance "); 
+  digitalWrite(PIN_3V, HIGH);
 }
 
 
 void loop()
 {
   //Asservissement de la balance
-  position_lame = map(analogRead(PIN_in_position), 0, 1024, 0, 255); //position de la lame
+  position_lame = analogRead(PIN_in_position); //position de la lame
   erreur = consigne - position_lame; //erreur de la position de la lame 
   volt_solenoide = pid(erreur, kp, ki, kd); //tension a fournir au solenoide
-  Serial.println(volt_solenoide);
+  Serial.println(position_lame);
   //Changer le menu affiché
   lcd_key = read_LCD_buttons();
   choose_menu(menu, lcd_key, buttonPressed);
