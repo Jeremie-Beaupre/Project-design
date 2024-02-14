@@ -16,10 +16,10 @@ int PIN_out_solenoide = 7;
 //int PIN_3V = 31;
 
 //variable pour le PID 
-float kp = 2;
+float kp = 0.01;
 float ki = 0.001;
 float kd = 0;
-float consigne = 470;
+float consigne = 300;
 float position_lame;
 float erreur;
 float volt_solenoide;
@@ -32,7 +32,8 @@ void setup()
   analogWrite(PIN_out_solenoide, 0);
   lcd.begin(16, 2);             
   lcd.setCursor(0,0);
-  lcd.print("Superbe Balance "); 
+  lcd.print("Superbe Balance ");
+  consigne = analogRead(PIN_in_position); 
   //digitalWrite(PIN_3V, HIGH);
 }
 
@@ -56,7 +57,7 @@ void loop()
   Serial.println(erreur);
   Serial.print("solenoide: ");
   Serial.println(volt_solenoide);
-  delay(2000);
+  //delay(2000);
   //Changer le menu affiché
   lcd_key = read_LCD_buttons();
   choose_menu(menu, lcd_key, buttonPressed);
