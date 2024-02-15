@@ -63,6 +63,7 @@ void loop()
     i=0;
   }
   i++;
+  
   if (volt_solenoide >= 255){
     volt_solenoide =255;
   }
