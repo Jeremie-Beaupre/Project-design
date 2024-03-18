@@ -16,16 +16,15 @@ int PIN_out_solenoide = 45;
 //int PIN_3V = 31;
 
 //variable pour le PID 
-float kp = 0.01;
-float ki = 0.001;
+float kp = 0.2;
+float ki = 0.0001;
 float kd = 0;
 float consigne = 300;
 float position_lame;
 float erreur;
 float erreur_mean;
 float volt_solenoide;
-int position_lame_moyenne;
-int moy[10];
+float volt_solenoide_mean;
 int i;
 
 
@@ -55,9 +54,9 @@ void loop()
   //Asservissement de la balance
   position_lame = analogRead(PIN_in_position); //position de la lame
   erreur = position_lame - consigne; //erreur de la position de la lame 
-  erreur_mean = mean(erreur);
-  volt_solenoide = pid(erreur, kp, ki, kd); //tension a fournir au solenoide
-  
+  erreur_mean = mean_erreur(erreur);
+  volt_solenoide = pid(erreur_mean, kp, ki, kd); //tension a fournir au solenoide
+  volt_solenoide_mean = mean_volt(volt_solenoide);
 
   
   if (volt_solenoide >= 255){
@@ -66,18 +65,18 @@ void loop()
   else if (volt_solenoide <= 0){
     volt_solenoide = 0;
   }
-  analogWrite(PIN_out_solenoide, 0);
-  // analogWrite(PIN_out_solenoide, volt_solenoide);
+  // analogWrite(PIN_out_solenoide, 0);
+  analogWrite(PIN_out_solenoide, volt_solenoide);
   // Serial.print("position lame: ");
   // Serial.println(position_lame);
-  Serial.print("erreur: ");
-  Serial.println(erreur);
-  Serial.print("erreur moyenne: ");
-  Serial.println(erreur_mean);
+  // Serial.print("erreur: ");
+  // Serial.print(erreur);
+  // Serial.print(": erreur moyenne: ");
+  // Serial.println(erreur_mean);
   // Serial.print("solenoide: ");
   // Serial.println(volt_solenoide);
-  // Serial.print("Poids: ");
-  // Serial.println(volt_solenoide*0.556);
+  Serial.print("Poids: ");
+  Serial.println(volt_solenoide_mean*0.56);
 
 
 //Changer le menu affiché
@@ -108,12 +107,12 @@ void loop()
       }
     case 4:
       {
-      lcd.print("Nbr. de piece:      ");
+      lcd.print("Calibration:      ");
       break;
       }
-      case 5:
+    case 5:
       {
-      lcd.print("Auto destruction     ");
+      lcd.print("Tare:     ");
       break;
       }
   }

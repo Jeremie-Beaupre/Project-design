@@ -9,8 +9,11 @@
 #define btnSELECT 4
 #define btnNONE   5
 int adc_key_in  = 0;
-int array[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int array[10];
+int array_1[25];
 int b = 0;
+int c = 0;
+int sum_1;
 int sum;
 
 //Détermine si l'utilisateur appuie sur un bouton
@@ -46,7 +49,7 @@ void choose_menu(int& menu, int lcd_key, bool& buttonPressed){
   }
 }
 
-float mean(float erreur){
+float mean_erreur(float erreur){
   sum = 0;
   array[b] = erreur;
   b += 1;
@@ -57,4 +60,17 @@ float mean(float erreur){
     sum += n;
   }
   return (sum/10);
+}
+
+float mean_volt(float volt){
+  sum_1 = 0;
+  array_1[c] = volt;
+  c += 1;
+  if (c > 25){
+    c = 0;
+  }
+  for (int a : array_1){
+    sum_1 += a;
+  }
+  return (sum_1/25);
 }
