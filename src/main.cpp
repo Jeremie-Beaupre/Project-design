@@ -12,7 +12,7 @@ bool buttonPressed = false;
 
 //PIN pour le PID
 int PIN_in_position = A15;
-int PIN_out_solenoide = 7;
+int PIN_out_solenoide = 45;
 //int PIN_3V = 31;
 
 //variable pour le PID 
@@ -22,11 +22,12 @@ float kd = 0;
 float consigne = 300;
 float position_lame;
 float erreur;
+float erreur_mean;
 float volt_solenoide;
 int position_lame_moyenne;
 int moy[10];
 int i;
-int mean = 0;
+
 
 
 void setup()
@@ -54,15 +55,10 @@ void loop()
   //Asservissement de la balance
   position_lame = analogRead(PIN_in_position); //position de la lame
   erreur = position_lame - consigne; //erreur de la position de la lame 
+  erreur_mean = mean(erreur);
   volt_solenoide = pid(erreur, kp, ki, kd); //tension a fournir au solenoide
+  
 
-  //Changer le menu affiché
-  moy[i] = volt_solenoide;
-  if(i%10){
-    mean = calculateMean(moy, 10);
-    i=0;
-  }
-  i++;
   
   if (volt_solenoide >= 255){
     volt_solenoide =255;
@@ -70,15 +66,21 @@ void loop()
   else if (volt_solenoide <= 0){
     volt_solenoide = 0;
   }
-  analogWrite(PIN_out_solenoide, volt_solenoide);
-  Serial.print("position lame: ");
-  Serial.println(position_lame);
+  analogWrite(PIN_out_solenoide, 0);
+  // analogWrite(PIN_out_solenoide, volt_solenoide);
+  // Serial.print("position lame: ");
+  // Serial.println(position_lame);
   Serial.print("erreur: ");
   Serial.println(erreur);
-  Serial.print("solenoide: ");
-  Serial.println(volt_solenoide);
-  //delay(2000);
+  Serial.print("erreur moyenne: ");
+  Serial.println(erreur_mean);
+  // Serial.print("solenoide: ");
+  // Serial.println(volt_solenoide);
+  // Serial.print("Poids: ");
+  // Serial.println(volt_solenoide*0.556);
 
+
+//Changer le menu affiché
   lcd_key = read_LCD_buttons();
   choose_menu(menu, lcd_key, buttonPressed);
   lcd.setCursor(0,1);
@@ -91,17 +93,17 @@ void loop()
       }
     case 1:
       {
-      lcd.print("Poid (g):          ");
+      lcd.print("Poids (g):          ");
       break;
       }
     case 2:
       {
-      lcd.print("Poid (oz):         ");
+      lcd.print("Poids (oz):         ");
       break;
       }
     case 3:
       {
-      lcd.print("Poid (slug):        ");
+      lcd.print("Poids (slug):        ");
       break;
       }
     case 4:
