@@ -2,14 +2,7 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 
-#define btnRIGHT  0
-#define btnUP     1
-#define btnDOWN   2
-#define btnLEFT   3
-#define btnSELECT 4
-#define btnNONE   5
 int adc_key_in  = 0;
-
 
 //Détermine si l'utilisateur appuie sur un bouton
 int read_LCD_buttons(){
@@ -24,23 +17,31 @@ int read_LCD_buttons(){
 }
 
 //Met a jour la valeur menu qui détermine le menu affiché
-void choose_menu(int& menu, int lcd_key, bool& buttonPressed){
-  if (lcd_key == btnUP && !buttonPressed){
+void choose_menu(int& menu, int lcd_key, bool& buttonPressed)
+{
+  if (lcd_key == btnUP && !buttonPressed)
+  {
     menu += 1;
-    if (menu == 6){
+    if (menu == MENU_TEST){
     menu = 1;
-    }
-  buttonPressed = true;
-  }
-  else if (lcd_key == btnDOWN && !buttonPressed){
-    menu -= 1;
-    if (menu <= 0){
-      menu = 5;
     }
     buttonPressed = true;
   }
-  else if (lcd_key == btnNONE) {
+  else if (lcd_key == btnDOWN && !buttonPressed)
+  {
+    menu -= 1;
+    if (menu <= 0){
+      menu = MENU_NBRpc;
+    }
+    buttonPressed = true;
+  }
+  else if (lcd_key == btnNONE) 
+  {
     buttonPressed = false;
+  }
+  else if (lcd_key == btnRIGHT){
+    menu = MENU_TEST;
+    buttonPressed = true;
   }
 }
 
