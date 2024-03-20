@@ -16,6 +16,10 @@ int menu = 0;
 int lcd_key;
 bool buttonPressed = false;
 
+//Lecture poid
+float tension_poid = 0;
+int PIN_in_poid = A14;
+
 //PIN pour le PID
 int PIN_in_position = A15;
 int PIN_out_solenoide = 7;
@@ -24,7 +28,11 @@ int PIN_out_solenoide = 7;
 float consigne = 300;
 float position_lame;
 float erreur;
+float erreur_mean;
 float volt_solenoide;
+float volt_solenoide_mean;
+
+//Old Version
 int position_lame_moyenne;
 int moy[10];
 int i;
@@ -42,22 +50,16 @@ void setup()
   consigne = analogRead(PIN_in_position);
 }
 
-float calculateMean(int arr[], int size) {
-    int sum = 0;
-    for (int i = 0; i < size; i++) {
-        sum += arr[i];
-    }
-    return (float)sum / size;
-}
 
 void loop()
 {
   //Asservissement de la balance
   position_lame = analogRead(PIN_in_position);  //position de la lame
   erreur = position_lame - consigne;            //erreur de la position de la lame 
+  erreur_mean = mean_erreur(erreur);
   volt_solenoide = pid(erreur);                 //tension a fournir au solenoide
 
-  //Changer le menu affiché
+  //Calcule de la moyenne au 10 mesure
   moy[i] = volt_solenoide;
   if(i%10){
     mean = calculateMean(moy, 10);
@@ -71,7 +73,10 @@ void loop()
   else if (volt_solenoide <= 0){
     volt_solenoide = 0;
   }
+
   analogWrite(PIN_out_solenoide, volt_solenoide);
+  tension_poid = analogRead(PIN_in_poid);
+  volt_solenoide_mean = mean_volt(tension_poid);
 
   //Logique pour ecrire sur le LCD
   lcd_key = read_LCD_buttons();
@@ -93,7 +98,7 @@ void loop()
       lcd.print("Poid (oz):         ");
       break;
 
-    case MENU_OIDsl:
+    case MENU_POIDsl:
       lcd.print("Poid (slug):        ");
       break;
 
@@ -110,10 +115,11 @@ void loop()
 
 
   //GUI Reception
-  if(Serial.available()){
+  if(Serial.available())
+  {
     data = Serial.readString();       
     lcd.setCursor(0,0);
-    lcd.print("                ");  //Clear le LCD
+    lcd.print("                ");    //Clear le LCD
     lcd.setCursor(0,0);
     dl = data.charAt(0);
     readGUI(data);
