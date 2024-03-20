@@ -1,0 +1,10 @@
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\bin\Debug\GUI Arduino.exe.config
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\bin\Debug\GUI Arduino.exe
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\bin\Debug\GUI Arduino.pdb
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.csproj.AssemblyReference.cache
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI_Arduino.Form1.resources
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI_Arduino.Properties.Resources.resources
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.csproj.GenerateResource.cache
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.csproj.CoreCompileInputs.cache
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.exe
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.pdb
