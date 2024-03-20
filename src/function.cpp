@@ -49,6 +49,7 @@ void choose_menu(int& menu, int lcd_key, bool& buttonPressed){
   }
 }
 
+//Moyenne de l'erreur
 float mean_erreur(float erreur){
   sum = 0;
   array[b] = erreur;
@@ -56,12 +57,13 @@ float mean_erreur(float erreur){
   if (b >= 9){
     b = 0;
   }
-  for (int n : array){
+  for (float n : array){
     sum += n;
   }
   return (sum/10);
 }
 
+//Moyenne de la sortie de l'arduino
 float mean_volt(float volt){
   sum_1 = 0;
   array_1[c] = volt;
@@ -69,8 +71,9 @@ float mean_volt(float volt){
   if (c > 25){
     c = 0;
   }
-  for (int a : array_1){
+  for (float a : array_1){
     sum_1 += a;
   }
   return (sum_1/25);
 }
+
