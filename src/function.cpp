@@ -13,8 +13,8 @@ int array[10];
 int array_1[25];
 int b = 0;
 int c = 0;
-int sum_1;
-int sum;
+float sum_1;
+float sum;
 
 //Détermine si l'utilisateur appuie sur un bouton
 int read_LCD_buttons(){
@@ -41,6 +41,26 @@ void choose_menu(int& menu, int lcd_key, bool& buttonPressed){
     menu -= 1;
     if (menu <= 0){
       menu = 5;
+    }
+    buttonPressed = true;
+  }
+  else if (lcd_key == btnNONE) {
+    buttonPressed = false;
+  }
+}
+
+void choose_menu_2(int& menu_2, int lcd_key, bool& buttonPressed){
+  if (lcd_key == btnRIGHT && !buttonPressed){
+    menu_2 += 1;
+    if (menu_2 == 6){
+    menu_2 = 1;
+    }
+  buttonPressed = true;
+  }
+  else if (lcd_key == btnLEFT && !buttonPressed){
+    menu_2 -= 1;
+    if (menu_2 <= 0){
+      menu_2 = 5;
     }
     buttonPressed = true;
   }
