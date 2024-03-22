@@ -29,8 +29,8 @@ int PIN_out_solenoide = 45;
 float tar = 26.2;
 
 //variable pour le PID 
-float kp = 0.2;
-float ki = 0.0001;
+float kp = 0.00007;
+float ki = 0.00007;
 float kd = 0;
 float consigne = 300;
 float position_lame;
@@ -67,27 +67,26 @@ void loop()
   if (volt_solenoide >= 255){
     volt_solenoide =255;
   }
-  //else if (volt_solenoide <= 0){
-  //  volt_solenoide = 0;
-  //}
-  
+  // else if (volt_solenoide <= 0){
+  //   volt_solenoide = 0;
+  // }
+
 
   
 
   // analogWrite(PIN_out_solenoide, 20);
   analogWrite(PIN_out_solenoide, volt_solenoide);
-  Serial.print("position lame: ");
-  Serial.println(position_lame);
-  // Serial.print("erreur: ");
-  // Serial.println(erreur);
+  // Serial.print("position lame: ");
+  // Serial.println(position_lame);
+  Serial.print("erreur: ");
+  Serial.println(erreur);
   // Serial.print(": erreur moyenne: ");
   // Serial.println(K_poid);
   // Serial.print("solenoide: ");
   // Serial.println(volt_solenoide);
   
   tension_poid = analogRead(PIN_in_poid);
-  volt_solenoide_mean = tension_poid;
-  //volt_solenoide_mean = mean_volt(tension_poid);
+  volt_solenoide_mean = mean_volt(tension_poid);
 
 
 
