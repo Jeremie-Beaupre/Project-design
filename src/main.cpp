@@ -26,11 +26,11 @@ int PIN_out_solenoide = 45;
 //int PIN_3V = 31;
 
 //tarage
-float tar = 26.2;
+float tar = 30;
 
 //variable pour le PID 
-float kp = 0.00007;
-float ki = 0.00007;
+float kp = 0.0006;
+float ki = 0.0001;
 float kd = 0;
 float consigne = 300;
 float position_lame;
@@ -38,8 +38,42 @@ float erreur;
 float erreur_mean;
 float volt_solenoide;
 float volt_solenoide_mean;
-int i;
+long i;
 
+
+// stabilité mesure
+const int n_mesures_stabilite = 40; 
+const float tolerance_stabilite = 0.003/K_poid;
+float mesures_tension_poids[n_mesures_stabilite];
+float standard_dev = 10;
+bool stable = false;
+bool previous_stable = false;
+float tension_stable;
+
+//timer
+float past_millis = 0;
+float current_millis = 0; 
+int interval = 2000;
+
+float get_mean(float array[], const byte length){
+  double total = 0;
+  for(int i = 0; i < length; i++){
+    total = total + array[i];
+  }
+  return total/length;
+}
+
+float get_std(float array[], const byte length){
+  float mean = get_mean(array, length);
+  long total = 0;
+  for (int h = 0; h < length; h++){
+    total = total + (array[h] - mean)*(total + (array[h] - mean));
+  }
+
+  float variance = total/(float)length;
+  float std = pow(variance, 0.5);
+  return std;
+}
 
 
 
@@ -52,7 +86,12 @@ void setup()
   lcd.begin(16, 2);             
   lcd.setCursor(0,0);
   lcd.print("Superbe Balance ");
-  consigne = analogRead(PIN_in_position);
+  for (int t = 0; t < 20; t++){
+  Serial.println(analogRead(PIN_in_position));
+  consigne = mean_position(PIN_in_position);
+  Serial.println(consigne);
+  }
+  
   //digitalWrite(PIN_3V, HIGH);
 }
 
@@ -62,8 +101,8 @@ void loop()
   //Asservissement de la balance
   position_lame = analogRead(PIN_in_position); //position de la lame
   erreur = position_lame - consigne; //erreur de la position de la lame 
-  erreur_mean = mean_erreur(erreur);
-  volt_solenoide = pid(erreur_mean, kp, ki, kd); //tension a fournir au solenoide
+  // erreur_mean = mean_erreur(erreur);
+  volt_solenoide = pid(erreur, kp, ki, kd); //tension a fournir au solenoide
   if (volt_solenoide >= 255){
     volt_solenoide =255;
   }
@@ -78,29 +117,32 @@ void loop()
   analogWrite(PIN_out_solenoide, volt_solenoide);
   // Serial.print("position lame: ");
   // Serial.println(position_lame);
-  Serial.print("erreur: ");
-  Serial.println(erreur);
-  // Serial.print(": erreur moyenne: ");
-  // Serial.println(K_poid);
-  // Serial.print("solenoide: ");
-  // Serial.println(volt_solenoide);
-  
   tension_poid = analogRead(PIN_in_poid);
   volt_solenoide_mean = mean_volt(tension_poid);
 
+  mesures_tension_poids[i % n_mesures_stabilite] = volt_solenoide_mean;
+
+  standard_dev = get_std(mesures_tension_poids, n_mesures_stabilite);
+  previous_stable = stable;
+  if (standard_dev <= tolerance_stabilite){
+    stable = true;
+  } else{
+    stable = false;
+  }
+
+  
 
 
-  //Serial.print("Poids: ");
-  //Serial.println(volt_solenoide_mean*0.37);
-  // Serial.print("Poids: ");
-  // Serial.println(volt_solenoide_mean*0.59);
-  // Serial.println(K_poid);
 
 
-  //Changer le menu affiché
+
+
+
   lcd_key = read_LCD_buttons();
   choose_menu(menu, lcd_key, buttonPressed);
   
+  current_millis = millis();
+
   switch (menu)
   {               
     case 0:
@@ -113,18 +155,72 @@ void loop()
       {
       lcd.setCursor(0,0);
       lcd.print("Poids (g):          ");
-      lcd.setCursor(0,1);
-      lcd.print((volt_solenoide_mean-tar)*K_poid, 1);
-      lcd.print("             ");
+      float voltage = get_mean(mesures_tension_poids, n_mesures_stabilite) - tar;
+      if (!stable){
+        lcd.setCursor(0,1);
+        lcd.print((voltage)*K_poid, 1);
+        lcd.print("            ");
+        lcd.setCursor(5,1);
+        lcd.print("Instable          ");
+      }
+      else if (!previous_stable && stable){
+        lcd.setCursor(0,1);
+        lcd.print((voltage)*K_poid, 1);
+        lcd.print("            ");
+        lcd.setCursor(5,1);
+        lcd.print("Instable           "); 
+      }
+      else if (current_millis - past_millis >= interval){
+        past_millis = millis();
+        lcd.setCursor(0,1);
+        lcd.print((voltage)*K_poid, 1);
+        lcd.print("            ");
+        lcd.setCursor(5,1);
+        lcd.print("Instable           "); 
+
+      }
+      else{
+        lcd.setCursor(4,1);
+        lcd.print("            ");
+        lcd.setCursor(5,1);
+        lcd.print("Stable       ");
+      }
       break;
       }
     case 2:
       {
       lcd.setCursor(0,0);
       lcd.print("Poids (oz):         ");
-      lcd.setCursor(0,1);
-      lcd.print((volt_solenoide_mean-tar)*0.37*0.03527, 1);
-      lcd.print("                  ");
+      float voltage = get_mean(mesures_tension_poids, n_mesures_stabilite) - tar;
+      if (!stable){
+        lcd.setCursor(0,1);
+        lcd.print((voltage)*K_poid*0.03527, 1);
+        lcd.print("            ");
+        lcd.setCursor(5,1);
+        lcd.print("Instable          ");
+      }
+      else if (!previous_stable && stable){
+        lcd.setCursor(0,1);
+        lcd.print((voltage)*K_poid*0.03527, 1);
+        lcd.print("            ");
+        lcd.setCursor(5,1);
+        lcd.print("Instable           "); 
+      }
+      else if (current_millis - past_millis >= interval){
+        past_millis = millis();
+        lcd.setCursor(0,1);
+        lcd.print((voltage)*K_poid*0.03527, 1);
+        lcd.print("            ");
+        lcd.setCursor(5,1);
+        lcd.print("Instable           "); 
+
+      }
+      else{
+        lcd.setCursor(4,1);
+        lcd.print("            ");
+        lcd.setCursor(5,1);
+        lcd.print("Stable       ");
+      }
       break;
       }
     case 3:
@@ -214,5 +310,5 @@ void loop()
       break;
       }
   }
+i++;
 }
-

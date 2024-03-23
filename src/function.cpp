@@ -11,10 +11,13 @@
 int adc_key_in  = 0;
 int array[10];
 int array_1[25];
+int array_2[10];
 int b = 0;
 int c = 0;
+int d = 0;
 float sum_1;
 float sum;
+float sum_3;
 
 //Détermine si l'utilisateur appuie sur un bouton
 int read_LCD_buttons(){
@@ -68,6 +71,20 @@ void choose_menu_2(int& menu_2, int lcd_key, bool& buttonPressed){
     buttonPressed = false;
   }
 }
+//Moyenne de position
+float mean_position(int PIN_in_position){
+  sum_3 = 0;
+  array_2[d] = analogRead(PIN_in_position);
+  d += 1;
+  if (d >= 9){
+    d = 0;
+  }
+  for (float e : array_2){
+    sum_3 += e;
+  }
+  return (sum_3/10);
+}
+
 
 //Moyenne de l'erreur
 float mean_erreur(float erreur){
@@ -96,4 +113,5 @@ float mean_volt(float volt){
   }
   return (sum_1/25);
 }
+
 
