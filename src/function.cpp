@@ -55,7 +55,7 @@ void choose_menu(int& menu, int lcd_key, bool& buttonPressed){
 void choose_menu_2(int& menu_2, int lcd_key, bool& buttonPressed){
   if (lcd_key == btnRIGHT && !buttonPressed){
     menu_2 += 1;
-    if (menu_2 == 6){
+    if (menu_2 == 7){
     menu_2 = 1;
     }
   buttonPressed = true;

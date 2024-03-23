@@ -29,9 +29,9 @@ int PIN_out_solenoide = 45;
 float tar = 30;
 
 //variable pour le PID 
-float kp = 0.0006;
-float ki = 0.0001;
-float kd = 0;
+// float kp = 0.0006;
+// float ki = 0.0001;
+// float kd = 0;
 float consigne = 300;
 float position_lame;
 float erreur;
@@ -42,7 +42,7 @@ long i;
 
 
 // stabilité mesure
-const int n_mesures_stabilite = 40; 
+const int n_mesures_stabilite = 80; 
 const float tolerance_stabilite = 0.003/K_poid;
 float mesures_tension_poids[n_mesures_stabilite];
 float standard_dev = 10;
@@ -102,7 +102,7 @@ void loop()
   position_lame = analogRead(PIN_in_position); //position de la lame
   erreur = position_lame - consigne; //erreur de la position de la lame 
   // erreur_mean = mean_erreur(erreur);
-  volt_solenoide = pid(erreur, kp, ki, kd); //tension a fournir au solenoide
+  volt_solenoide = pid(erreur); //tension a fournir au solenoide
   if (volt_solenoide >= 255){
     volt_solenoide =255;
   }
@@ -115,8 +115,8 @@ void loop()
 
   // analogWrite(PIN_out_solenoide, 20);
   analogWrite(PIN_out_solenoide, volt_solenoide);
-  // Serial.print("position lame: ");
-  // Serial.println(position_lame);
+  Serial.print("position lame: ");
+  Serial.println(position_lame);
   tension_poid = analogRead(PIN_in_poid);
   volt_solenoide_mean = mean_volt(tension_poid);
 
@@ -269,6 +269,12 @@ void loop()
           lcd.print("2 dollars :");
           lcd.print(int((volt_solenoide_mean-tar)*0.37/7.3));
           lcd.print("                ");
+          break;
+        }
+        case 6:
+        {
+          lcd.setCursor(0,1);
+          lcd.print("Hoang is best");
           break;
         }
       }

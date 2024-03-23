@@ -7,18 +7,12 @@ float erreur_precedente = 0;
 float sortie_pid;
 float sortie_pid_precedente;
 
+float kp = 0.0006;
+float ki = 0.0001;
+float kd = 0;
 
-// float pid(float erreur, float kp, float ki, float kd){
-//   temps_1 = millis();
-//   dt = temps_1 - temps_0;
-//   temps_0 = temps_1; 
-//   sortie_pid = sortie_pid_precedente + kp*(erreur - erreur_precedente) + ki*erreur*dt;
-//   sortie_pid_precedente = sortie_pid;
-//   erreur_precedente = erreur; 
-//   return sortie_pid;
-// }
 
-float pid(float erreur, float kp, float ki, float kd){
+float pid(float erreur){
   temps_1 = millis(); //temps_1 pour calculer dt
   dt = temps_1 - temps_0; //dt pour calculer l'integral
   temps_0 = temps_1; //temps_0 pour calculer dt
@@ -33,6 +27,15 @@ float pid(float erreur, float kp, float ki, float kd){
   return sortie_pid;
 }
 
-int test(){
-  return 0;
+void getPIDValues(float &outKp, float &outKi, float &outKd) {
+    outKp = kp;
+    outKi = ki;
+    outKd = kd;
 }
+
+void setPIDValues(float newKp, float newKi, float newKd) {
+    kp = newKp;
+    ki = newKi;
+    kd = newKd;
+}
+
