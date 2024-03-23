@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tareButton = new System.Windows.Forms.Button();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.calibreButton = new System.Windows.Forms.Button();
@@ -46,20 +47,32 @@
             this.textBoxKp = new System.Windows.Forms.TextBox();
             this.buttonActualiser = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.fermerbutton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comptagecomboBox = new System.Windows.Forms.ComboBox();
+            this.massecomboBox = new System.Windows.Forms.ComboBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.comptagebutton = new System.Windows.Forms.Button();
+            this.comptagetextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.modecomptagelabel = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.indicationlabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBoxMenuExpert.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tareButton
             // 
-            this.tareButton.ForeColor = System.Drawing.Color.Black;
-            this.tareButton.Location = new System.Drawing.Point(283, 225);
+            this.tareButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tareButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.tareButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            resources.ApplyResources(this.tareButton, "tareButton");
+            this.tareButton.ForeColor = System.Drawing.Color.White;
             this.tareButton.Name = "tareButton";
-            this.tareButton.Size = new System.Drawing.Size(110, 32);
-            this.tareButton.TabIndex = 0;
-            this.tareButton.Text = "Tarage";
             this.tareButton.UseVisualStyleBackColor = true;
             this.tareButton.Click += new System.EventHandler(this.tareButton_Click);
             // 
@@ -70,63 +83,52 @@
             // 
             // calibreButton
             // 
-            this.calibreButton.ForeColor = System.Drawing.Color.Black;
-            this.calibreButton.Location = new System.Drawing.Point(167, 225);
+            this.calibreButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.calibreButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.calibreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            resources.ApplyResources(this.calibreButton, "calibreButton");
+            this.calibreButton.ForeColor = System.Drawing.Color.White;
             this.calibreButton.Name = "calibreButton";
-            this.calibreButton.Size = new System.Drawing.Size(110, 32);
-            this.calibreButton.TabIndex = 1;
-            this.calibreButton.Text = "Étalonner";
             this.calibreButton.UseVisualStyleBackColor = true;
             this.calibreButton.Click += new System.EventHandler(this.calibreButton_Click);
             // 
             // mainTextBox
             // 
-            this.mainTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.mainTextBox.Enabled = false;
-            this.mainTextBox.Font = new System.Drawing.Font("Digital-7 Mono", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mainTextBox.Location = new System.Drawing.Point(167, 145);
-            this.mainTextBox.MaximumSize = new System.Drawing.Size(400, 400);
-            this.mainTextBox.Multiline = true;
+            this.mainTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(53)))), ((int)(((byte)(71)))));
+            resources.ApplyResources(this.mainTextBox, "mainTextBox");
+            this.mainTextBox.ForeColor = System.Drawing.Color.White;
             this.mainTextBox.Name = "mainTextBox";
             this.mainTextBox.ReadOnly = true;
-            this.mainTextBox.Size = new System.Drawing.Size(226, 57);
-            this.mainTextBox.TabIndex = 2;
-            this.mainTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // peseButton
             // 
-            this.peseButton.ForeColor = System.Drawing.Color.Black;
-            this.peseButton.Location = new System.Drawing.Point(399, 225);
+            this.peseButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.peseButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.peseButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            resources.ApplyResources(this.peseButton, "peseButton");
+            this.peseButton.ForeColor = System.Drawing.Color.White;
             this.peseButton.Name = "peseButton";
-            this.peseButton.Size = new System.Drawing.Size(110, 32);
-            this.peseButton.TabIndex = 3;
-            this.peseButton.Text = "Pesée";
             this.peseButton.UseVisualStyleBackColor = true;
             // 
             // comboBoxPort
             // 
             this.comboBoxPort.ForeColor = System.Drawing.Color.Black;
             this.comboBoxPort.FormattingEnabled = true;
-            this.comboBoxPort.Location = new System.Drawing.Point(8, 22);
+            resources.ApplyResources(this.comboBoxPort, "comboBoxPort");
             this.comboBoxPort.Name = "comboBoxPort";
-            this.comboBoxPort.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxPort.TabIndex = 4;
             this.comboBoxPort.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // checkBoxMenuExpert
             // 
-            this.checkBoxMenuExpert.AutoSize = true;
-            this.checkBoxMenuExpert.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxMenuExpert.Location = new System.Drawing.Point(150, 17);
+            resources.ApplyResources(this.checkBoxMenuExpert, "checkBoxMenuExpert");
+            this.checkBoxMenuExpert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.checkBoxMenuExpert.Name = "checkBoxMenuExpert";
-            this.checkBoxMenuExpert.Size = new System.Drawing.Size(96, 17);
-            this.checkBoxMenuExpert.TabIndex = 5;
-            this.checkBoxMenuExpert.Text = "Menu expert";
-            this.checkBoxMenuExpert.UseVisualStyleBackColor = true;
+            this.checkBoxMenuExpert.UseVisualStyleBackColor = false;
             this.checkBoxMenuExpert.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // groupBoxMenuExpert
             // 
+            this.groupBoxMenuExpert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(53)))), ((int)(((byte)(71)))));
             this.groupBoxMenuExpert.Controls.Add(this.buttonApliquer);
             this.groupBoxMenuExpert.Controls.Add(this.label3);
             this.groupBoxMenuExpert.Controls.Add(this.label2);
@@ -135,143 +137,197 @@
             this.groupBoxMenuExpert.Controls.Add(this.textBoxKi);
             this.groupBoxMenuExpert.Controls.Add(this.textBoxKp);
             this.groupBoxMenuExpert.Controls.Add(this.buttonActualiser);
-            this.groupBoxMenuExpert.Location = new System.Drawing.Point(180, 450);
+            this.groupBoxMenuExpert.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBoxMenuExpert.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.groupBoxMenuExpert, "groupBoxMenuExpert");
             this.groupBoxMenuExpert.Name = "groupBoxMenuExpert";
-            this.groupBoxMenuExpert.Size = new System.Drawing.Size(325, 100);
-            this.groupBoxMenuExpert.TabIndex = 6;
             this.groupBoxMenuExpert.TabStop = false;
-            this.groupBoxMenuExpert.Text = "Configuration PID";
-            this.groupBoxMenuExpert.Visible = false;
             // 
             // buttonApliquer
             // 
             this.buttonApliquer.ForeColor = System.Drawing.Color.Black;
-            this.buttonApliquer.Location = new System.Drawing.Point(180, 71);
+            resources.ApplyResources(this.buttonApliquer, "buttonApliquer");
             this.buttonApliquer.Name = "buttonApliquer";
-            this.buttonApliquer.Size = new System.Drawing.Size(100, 23);
-            this.buttonApliquer.TabIndex = 8;
-            this.buttonApliquer.Text = "Apliquer";
             this.buttonApliquer.UseVisualStyleBackColor = true;
             this.buttonApliquer.Click += new System.EventHandler(this.buttonApliquer_Click);
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(261, 29);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(19, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "kd";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(150, 29);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(15, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "ki";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(47, 29);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(19, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "kp";
             // 
             // textBoxKd
             // 
-            this.textBoxKd.Location = new System.Drawing.Point(218, 45);
+            resources.ApplyResources(this.textBoxKd, "textBoxKd");
             this.textBoxKd.Name = "textBoxKd";
-            this.textBoxKd.Size = new System.Drawing.Size(100, 20);
-            this.textBoxKd.TabIndex = 3;
             // 
             // textBoxKi
             // 
-            this.textBoxKi.Location = new System.Drawing.Point(112, 45);
+            resources.ApplyResources(this.textBoxKi, "textBoxKi");
             this.textBoxKi.Name = "textBoxKi";
-            this.textBoxKi.Size = new System.Drawing.Size(100, 20);
-            this.textBoxKi.TabIndex = 2;
             // 
             // textBoxKp
             // 
-            this.textBoxKp.Location = new System.Drawing.Point(6, 45);
-            this.textBoxKp.MaxLength = 7;
+            resources.ApplyResources(this.textBoxKp, "textBoxKp");
             this.textBoxKp.Name = "textBoxKp";
-            this.textBoxKp.Size = new System.Drawing.Size(100, 20);
-            this.textBoxKp.TabIndex = 1;
             // 
             // buttonActualiser
             // 
             this.buttonActualiser.ForeColor = System.Drawing.Color.Black;
-            this.buttonActualiser.Location = new System.Drawing.Point(50, 71);
+            resources.ApplyResources(this.buttonActualiser, "buttonActualiser");
             this.buttonActualiser.Name = "buttonActualiser";
-            this.buttonActualiser.Size = new System.Drawing.Size(100, 23);
-            this.buttonActualiser.TabIndex = 0;
-            this.buttonActualiser.Text = "Actualiser";
             this.buttonActualiser.UseVisualStyleBackColor = true;
             this.buttonActualiser.Click += new System.EventHandler(this.buttonActualiser_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(53)))), ((int)(((byte)(71)))));
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.comboBoxPort);
-            this.panel1.Controls.Add(this.checkBoxMenuExpert);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Controls.Add(this.fermerbutton);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(700, 50);
-            this.panel1.TabIndex = 7;
+            // 
+            // fermerbutton
+            // 
+            resources.ApplyResources(this.fermerbutton, "fermerbutton");
+            this.fermerbutton.FlatAppearance.BorderSize = 0;
+            this.fermerbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.fermerbutton.ForeColor = System.Drawing.Color.White;
+            this.fermerbutton.Name = "fermerbutton";
+            this.fermerbutton.UseVisualStyleBackColor = true;
+            this.fermerbutton.Click += new System.EventHandler(this.fermerbutton_Click);
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(32, 5);
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Port Série";
             // 
-            // comboBox1
+            // comptagecomboBox
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Digital-7 Mono", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "g",
-            "oz",
-            "slug"});
-            this.comboBox1.Location = new System.Drawing.Point(398, 145);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(111, 57);
-            this.comboBox1.TabIndex = 8;
+            this.comptagecomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comptagecomboBox, "comptagecomboBox");
+            this.comptagecomboBox.FormattingEnabled = true;
+            this.comptagecomboBox.Items.AddRange(new object[] {
+            resources.GetString("comptagecomboBox.Items"),
+            resources.GetString("comptagecomboBox.Items1"),
+            resources.GetString("comptagecomboBox.Items2"),
+            resources.GetString("comptagecomboBox.Items3"),
+            resources.GetString("comptagecomboBox.Items4"),
+            resources.GetString("comptagecomboBox.Items5"),
+            resources.GetString("comptagecomboBox.Items6")});
+            this.comptagecomboBox.Name = "comptagecomboBox";
+            this.comptagecomboBox.SelectedIndexChanged += new System.EventHandler(this.comptagecomboBox_SelectedIndexChanged);
+            // 
+            // massecomboBox
+            // 
+            this.massecomboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(53)))), ((int)(((byte)(71)))));
+            this.massecomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.massecomboBox, "massecomboBox");
+            this.massecomboBox.ForeColor = System.Drawing.Color.White;
+            this.massecomboBox.FormattingEnabled = true;
+            this.massecomboBox.Items.AddRange(new object[] {
+            resources.GetString("massecomboBox.Items"),
+            resources.GetString("massecomboBox.Items1"),
+            resources.GetString("massecomboBox.Items2")});
+            this.massecomboBox.Name = "massecomboBox";
+            this.massecomboBox.SelectedIndexChanged += new System.EventHandler(this.massecomboBox_SelectedIndexChanged);
+            // 
+            // progressBar1
+            // 
+            resources.ApplyResources(this.progressBar1, "progressBar1");
+            this.progressBar1.Name = "progressBar1";
+            // 
+            // comptagebutton
+            // 
+            this.comptagebutton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comptagebutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.comptagebutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            resources.ApplyResources(this.comptagebutton, "comptagebutton");
+            this.comptagebutton.ForeColor = System.Drawing.Color.White;
+            this.comptagebutton.Name = "comptagebutton";
+            this.comptagebutton.UseVisualStyleBackColor = true;
+            this.comptagebutton.Click += new System.EventHandler(this.comptagebutton_Click);
+            // 
+            // comptagetextBox
+            // 
+            this.comptagetextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(53)))), ((int)(((byte)(71)))));
+            resources.ApplyResources(this.comptagetextBox, "comptagetextBox");
+            this.comptagetextBox.ForeColor = System.Drawing.Color.White;
+            this.comptagetextBox.Name = "comptagetextBox";
+            this.comptagetextBox.ReadOnly = true;
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // modecomptagelabel
+            // 
+            resources.ApplyResources(this.modecomptagelabel, "modecomptagelabel");
+            this.modecomptagelabel.Name = "modecomptagelabel";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel2.Controls.Add(this.comboBoxPort);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.checkBoxMenuExpert);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // indicationlabel
+            // 
+            resources.ApplyResources(this.indicationlabel, "indicationlabel");
+            this.indicationlabel.ForeColor = System.Drawing.Color.Red;
+            this.indicationlabel.Name = "indicationlabel";
+            // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(700, 700);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.indicationlabel);
+            this.Controls.Add(this.modecomptagelabel);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.comptagetextBox);
+            this.Controls.Add(this.comptagebutton);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.massecomboBox);
+            this.Controls.Add(this.comptagecomboBox);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBoxMenuExpert);
             this.Controls.Add(this.peseButton);
             this.Controls.Add(this.mainTextBox);
             this.Controls.Add(this.tareButton);
             this.Controls.Add(this.calibreButton);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.pictureBox1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
-            this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxMenuExpert.ResumeLayout(false);
             this.groupBoxMenuExpert.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,7 +353,17 @@
         private System.Windows.Forms.Button buttonApliquer;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox massecomboBox;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ComboBox comptagecomboBox;
+        private System.Windows.Forms.Button fermerbutton;
+        private System.Windows.Forms.Button comptagebutton;
+        private System.Windows.Forms.TextBox comptagetextBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label modecomptagelabel;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label indicationlabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

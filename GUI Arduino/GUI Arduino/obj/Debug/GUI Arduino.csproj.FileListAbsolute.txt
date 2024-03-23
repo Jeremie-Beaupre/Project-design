@@ -8,3 +8,9 @@ C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.cspr
 C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.csproj.CoreCompileInputs.cache
 C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.exe
 C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.pdb
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\bin\Debug\aa-DJ\GUI Arduino.resources.dll
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\bin\Debug\en\GUI Arduino.resources.dll
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI_Arduino.Form1.aa-DJ.resources
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI_Arduino.Form1.en.resources
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\aa-DJ\GUI Arduino.resources.dll
+C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\en\GUI Arduino.resources.dll
