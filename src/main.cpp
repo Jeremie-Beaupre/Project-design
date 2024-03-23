@@ -27,6 +27,7 @@ int PIN_out_solenoide = 45;
 
 //tarage
 float tar = 30;
+float poid_gramme;
 
 //variable pour le PID 
 // float kp = 0.0006;
@@ -142,6 +143,8 @@ void loop()
   choose_menu(menu, lcd_key, buttonPressed);
   
   current_millis = millis();
+  float voltage = get_mean(mesures_tension_poids, n_mesures_stabilite) - tar;
+  poid_gramme = voltage*K_poid;
 
   switch (menu)
   {               
@@ -155,7 +158,6 @@ void loop()
       {
       lcd.setCursor(0,0);
       lcd.print("Poids (g):          ");
-      float voltage = get_mean(mesures_tension_poids, n_mesures_stabilite) - tar;
       if (!stable){
         lcd.setCursor(0,1);
         lcd.print((voltage)*K_poid, 1);
@@ -191,7 +193,6 @@ void loop()
       {
       lcd.setCursor(0,0);
       lcd.print("Poids (oz):         ");
-      float voltage = get_mean(mesures_tension_poids, n_mesures_stabilite) - tar;
       if (!stable){
         lcd.setCursor(0,1);
         lcd.print((voltage)*K_poid*0.03527, 1);
