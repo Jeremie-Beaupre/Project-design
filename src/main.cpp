@@ -1,6 +1,7 @@
 #include <LiquidCrystal.h>
 #include <Arduino.h>
 #include "function.h"
+#include "gui.h"
 
 
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
@@ -11,10 +12,13 @@ int menu_2 = 1;
 int lcd_key;
 bool buttonPressed = false;
 
+//GUI
+String data, formattedData;
+char dl;
+
 //Lecture poid
 float tension_poid = 0;
 int PIN_in_poid = A14;
-
 
 //Calibration
 unsigned long startTime = 0;
@@ -23,16 +27,12 @@ float K_poid = 0.32;
 //PIN pour le PID
 int PIN_in_position = A15;
 int PIN_out_solenoide = 45;
-//int PIN_3V = 31;
 
 //tarage
 float tar = 30;
 float poid_gramme;
 
 //variable pour le PID 
-// float kp = 0.0006;
-// float ki = 0.0001;
-// float kd = 0;
 float consigne = 300;
 float position_lame;
 float erreur;
@@ -92,8 +92,6 @@ void setup()
   consigne = mean_position(PIN_in_position);
   Serial.println(consigne);
   }
-  
-  //digitalWrite(PIN_3V, HIGH);
 }
 
 
@@ -102,19 +100,11 @@ void loop()
   //Asservissement de la balance
   position_lame = analogRead(PIN_in_position); //position de la lame
   erreur = position_lame - consigne; //erreur de la position de la lame 
-  // erreur_mean = mean_erreur(erreur);
   volt_solenoide = pid(erreur); //tension a fournir au solenoide
   if (volt_solenoide >= 255){
     volt_solenoide =255;
   }
-  // else if (volt_solenoide <= 0){
-  //   volt_solenoide = 0;
-  // }
 
-
-  
-
-  // analogWrite(PIN_out_solenoide, 20);
   analogWrite(PIN_out_solenoide, volt_solenoide);
   Serial.print("position lame: ");
   Serial.println(position_lame);
@@ -131,20 +121,14 @@ void loop()
     stable = false;
   }
 
-  
-
-
-
-
-
-
-
   lcd_key = read_LCD_buttons();
   choose_menu(menu, lcd_key, buttonPressed);
   
   current_millis = millis();
   float voltage = get_mean(mesures_tension_poids, n_mesures_stabilite) - tar;
   poid_gramme = voltage*K_poid;
+
+  writeGUI(String(poid_gramme), "MAIN", Serial);
 
   switch (menu)
   {               
@@ -317,5 +301,13 @@ void loop()
       break;
       }
   }
-i++;
+  i++;
+
+  //GUI Reception
+  if(Serial.available())
+  {
+    data = Serial.readString();       
+    dl = data.charAt(0);
+    readGUI(data);
+  }
 }
