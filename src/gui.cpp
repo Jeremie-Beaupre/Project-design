@@ -8,7 +8,7 @@ void writeGUI(String outdata, String messageType, HardwareSerial& Serial)
     Serial.println(outdata);
 }
 
-void readGUI(String& indata)
+int readGUI(String& indata)
 {
     char dl;
     String formattedData;
@@ -16,8 +16,8 @@ void readGUI(String& indata)
     switch(dl)
     {
         case 'A':
-            //lcd.print("TARE");    //Mettre une variable qui va determiner l'etat du lcd
-            break;
+            // On recoit la commande de tarage
+            return 1;
         case 'B':
             //lcd.print("CALI");    //Mettre une variable qui va determiner l'etat du lcd
             break;
@@ -38,5 +38,15 @@ void readGUI(String& indata)
             float newkd = indata.substring(commaIndex2 + 1, commaIndex3).toFloat();
             setPIDValues(newkp, newki, newkd);
             break;
+        case 'E':
+            //Étalonnage d'une masse de 10g
+            break;
+        case 'F':
+            //Étalonnage d'une masse de 20g
+            break;
+        case 'G':
+            //Étalonnage d'une masse de 50g
+            break;
     }
+    return 0;
 }

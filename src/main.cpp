@@ -41,7 +41,6 @@ float volt_solenoide;
 float volt_solenoide_mean;
 long i;
 
-
 // stabilité mesure
 const int n_mesures_stabilite = 80; 
 const float tolerance_stabilite = 0.003/K_poid;
@@ -303,11 +302,25 @@ void loop()
   }
   i++;
 
+  if(stable){
+    writeGUI(String("stable"), "STAB", Serial);
+  }
+  else{
+    writeGUI(String("instable"), "STAB", Serial);
+  }
+
   //GUI Reception
   if(Serial.available())
   {
     data = Serial.readString();       
     dl = data.charAt(0);
-    readGUI(data);
+    int ret = readGUI(data);
+    if(ret == 1){
+      //Tarage provenant du GUI
+      tar = volt_solenoide_mean;
+    }
+    if(ret == 2){
+      //Étalonnage provenant du GUI
+    }
   }
 }
