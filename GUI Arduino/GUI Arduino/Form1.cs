@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Runtime.ExceptionServices;
@@ -46,9 +47,10 @@ namespace GUI_Arduino
         public Form1()
         {
             InitializeComponent();
+            massecomboBox.SelectedIndex = 0; //Met en gramme par defaut
         }
 
-        private double CalculerValeurMonetaire(double totalMass)
+        private double CalculerValeurMonetaireEstime(double totalMass)
         {
             double totalValue = 0.0;
             foreach (KeyValuePair<string, double> pair in masseMoyParPieces)
@@ -67,17 +69,17 @@ namespace GUI_Arduino
         {
             if (uniteMesure == 0) // on est en gramme
             {
-                mainTextBox.Text = masse.ToString("0.00");
+                mainTextBox.Text = masse.ToString("0.0");
             }
             else if (uniteMesure == 1) // on est en oz
             {
                 masse = masse * (float)0.035274;
-                mainTextBox.Text = masse.ToString("0.000000");
+                mainTextBox.Text = masse.ToString("0.0");
             }
             else if (uniteMesure == 2) // on est en slug
             {
                 masse = masse * (float)6.85218;
-                mainTextBox.Text = masse.ToString("0.000000") + "e-5";
+                mainTextBox.Text = masse.ToString("0.0") + "e-5";
             }
         }
 
@@ -95,9 +97,19 @@ namespace GUI_Arduino
 
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-            string indata = serialPort.ReadLine();
-            d1 writeit = new d1(Write2Form);
-            Invoke(writeit, indata);
+            try
+            {
+                string indata = serialPort.ReadLine();
+                d1 writeit = new d1(Write2Form);
+                Invoke(writeit, indata);
+                // Process the received data
+            }
+            catch (IOException ex)
+            {
+                // Handle the IOException gracefully
+                indicationlabel.Text = "L'arduino a été déconnecté" + ex.Message;
+                // Optionally, you can close and reopen the serial port, or perform other cleanup tasks
+            }
         }
 
         public void Write2Form(string indata)
@@ -113,7 +125,14 @@ namespace GUI_Arduino
                 {
                     case "MAIN":
                         string dataSubstring = indata.Substring(4);
-                        masseMain = float.Parse(dataSubstring);
+                        try
+                        {
+                            masseMain = float.Parse(dataSubstring);
+                        }
+                        catch(Exception e)
+                        {
+                            mainTextBox.Text = "Redémarrer!";
+                        }
                         affichermasse(masseMain);
                         break;
 
@@ -132,7 +151,8 @@ namespace GUI_Arduino
                             textBoxKd.Text = kd.ToString("F5");
                         }
                         break;
-
+                    default:
+                        break;
                 }
             }
         }
@@ -214,31 +234,47 @@ namespace GUI_Arduino
                     unitemasse = "gramme\0";
                     break;
             }
-            string message = string.Format("E{0}", unitemasse);
-            serialPort.Write(message);
         }
 
         private void comptagebutton_Click(object sender, EventArgs e)
         {
-            //Mettre un condition seulement si la progressbar est 100%
-            switch (modeComptage)
+            //Mettre un condition seulement si on est stable et selected mode
+            string key = comptagecomboBox.SelectedItem.ToString();
+            switch (key)
             {
-                case 0:
-                    double val = CalculerValeurMonetaire((double)masseMain);
+                case "Estimer":
+                    double val = CalculerValeurMonetaireEstime((double)masseMain);
                     comptagetextBox.Text = val.ToString("0.00") + "$";
                     break;
-                case 1:
-                    
+                case "1¢":
+                    int res = (int) (masseMain / masseMoyParPieces[key]);
+                    float val1 = res * (float)valeurParPieces[key];
+                    comptagetextBox.Text = $"{val1.ToString("0.00")}$ ({res} pièces de 1¢)";
                     break;
-                case 2:
+                case "5¢":
+                    int res2 = (int)(masseMain / masseMoyParPieces[key]);
+                    float val2 = res2 * (float)valeurParPieces[key];
+                    comptagetextBox.Text = $"{val2.ToString("0.00")}$ ({res2} pièces de {key})";
                     break;
-                case 3:
+                case "10¢":
+                    int res3 = (int)(masseMain / masseMoyParPieces[key]);
+                    float val3 = res3 * (float)valeurParPieces[key];
+                    comptagetextBox.Text = $"{val3.ToString("0.00")}$ ({res3} pièces de {key})";
                     break;
-                case 4:
+                case "25¢":
+                    int res4 = (int)(masseMain / masseMoyParPieces[key]);
+                    float val4 = res4 * (float)valeurParPieces[key];
+                    comptagetextBox.Text = $"{val4.ToString("0.00")}$ ({res4} pièces de {key})";
                     break;
-                case 5:
+                case "1$":
+                    int res5 = (int)(masseMain / masseMoyParPieces[key]);
+                    float val5 = res5 * (float)valeurParPieces[key];
+                    comptagetextBox.Text = $"{val5.ToString("0.00")}$ ({res5} pièces de {key})";
                     break;
-                case 6:
+                case "2$":
+                    int res6 = (int)(masseMain / masseMoyParPieces[key]);
+                    float val6 = res6 * (float)valeurParPieces[key];
+                    comptagetextBox.Text = $"{val6.ToString("0.00")}$ ({res6} pièces de {key})";
                     break;
             }
         }
