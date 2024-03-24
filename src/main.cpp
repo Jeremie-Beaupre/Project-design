@@ -24,6 +24,9 @@ int PIN_in_poid = A14;
 unsigned long startTime = 0;
 float K_poid = 0.32;
 
+//Etalonnage
+Etalon etal = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+
 //PIN pour le PID
 int PIN_in_position = A15;
 int PIN_out_solenoide = 45;
@@ -87,9 +90,9 @@ void setup()
   lcd.setCursor(0,0);
   lcd.print("Superbe Balance ");
   for (int t = 0; t < 20; t++){
-  Serial.println(analogRead(PIN_in_position));
+  // Serial.println(analogRead(PIN_in_position));
   consigne = mean_position(PIN_in_position);
-  Serial.println(consigne);
+  // Serial.println(consigne);
   }
 }
 
@@ -105,8 +108,9 @@ void loop()
   }
 
   analogWrite(PIN_out_solenoide, volt_solenoide);
-  Serial.print("position lame: ");
-  Serial.println(position_lame);
+  // analogWrite(PIN_out_solenoide, 20);
+  // Serial.print("position lame: ");
+  // Serial.println(position_lame);
   tension_poid = analogRead(PIN_in_poid);
   volt_solenoide_mean = mean_volt(tension_poid);
 
@@ -319,8 +323,16 @@ void loop()
       //Tarage provenant du GUI
       tar = volt_solenoide_mean;
     }
-    if(ret == 2){
+    if(ret >= 2 && ret < 6){
       //Étalonnage provenant du GUI
+      float ketal = (volt_solenoide_mean-tar);
+      etalonnage(ret, poid_gramme, ketal, etal);
+      if(ret == 5){
+        writeGUI(String(etal.prec*100), "PREC", Serial);
+      }
+    }
+    if(ret == 6){
+      K_poid = etal.kmean;
     }
   }
 }

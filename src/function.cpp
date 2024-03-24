@@ -114,4 +114,26 @@ float mean_volt(float volt){
   return (sum_1/25);
 }
 
+void etalonnage(int numpoids, float val, float ketal, Etalon& eta)
+{
+  if(numpoids == 3){
+    //Cas du 10g
+    eta.km1 = 10/ketal;
+    eta.m1 = val;
+  }
+  else if(numpoids == 4){
+    //Cas du 20g
+    eta.km2 = 20/ketal;
+    eta.m2 = val;
+  }
+  else if(numpoids == 5){
+    //Cas du 50g
+    eta.km3 = 50/ketal;
+    eta.m5 = val;
+  }
+  if(eta.km1 > 0 && eta.km2 > 0 && eta.km3 > 0){
+    eta.kmean = (eta.km1 + eta.km2 + eta.km3) / 3;
+    eta.prec = abs(1 - (eta.m1 + eta.m2 + eta.m5)/80); // precision en pourcentage (1 = 100%)
+  }
+}
 

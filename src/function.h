@@ -1,3 +1,13 @@
+struct Etalon {
+    float m1;
+    float km1;
+    float m2;
+    float km2;
+    float m5;
+    float km3;
+    float kmean;
+    float prec;
+};
 int read_LCD_buttons();
 void choose_menu(int&, int, bool&);
 void choose_menu_2(int&, int, bool&);
@@ -7,3 +17,4 @@ float mean_volt(float);
 float mean_position(int);
 void getPIDValues(float &outKp, float &outKi, float &outKd);
 void setPIDValues(float newKp, float newKi, float newKd);
+void etalonnage(int numpoids, float val, float ketal, Etalon& eta);

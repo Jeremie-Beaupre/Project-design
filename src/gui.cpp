@@ -20,14 +20,17 @@ int readGUI(String& indata)
             return 1;
         case 'B':
             //lcd.print("CALI");    //Mettre une variable qui va determiner l'etat du lcd
-            break;
+            return 2;
         case 'C':
+        {
             float kp, ki ,kd; 
             getPIDValues(kp, ki, kd);
             formattedData = String(kp, 5) + "," + String(ki, 5) + "," + String(kd, 5);
             writeGUI(formattedData, "VPID", Serial);
             break;
+        }
         case 'D':
+        {
             indata.remove(0, 1); // Remove the "D" from the beginning of the message
             int commaIndex1 = indata.indexOf(','); // Find the index of the first comma
             int commaIndex2 = indata.indexOf(',', commaIndex1 + 1); // Find the index of the second comma
@@ -38,15 +41,19 @@ int readGUI(String& indata)
             float newkd = indata.substring(commaIndex2 + 1, commaIndex3).toFloat();
             setPIDValues(newkp, newki, newkd);
             break;
+        }
         case 'E':
             //Étalonnage d'une masse de 10g
-            break;
+            return 3;
         case 'F':
             //Étalonnage d'une masse de 20g
-            break;
+            return 4;
         case 'G':
             //Étalonnage d'une masse de 50g
-            break;
+            return 5;
+        case 'H':
+            //Calibration de la balance
+            return 6;
     }
     return 0;
 }
