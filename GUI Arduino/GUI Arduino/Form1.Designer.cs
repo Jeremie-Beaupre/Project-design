@@ -60,6 +60,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.indicatorpanel = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerStable = new System.Windows.Forms.Timer(this.components);
+            this.tmesure = new System.Windows.Forms.Label();
+            this.calibragebutton = new System.Windows.Forms.Button();
             this.groupBoxMenuExpert.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -308,11 +311,34 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timerStable
+            // 
+            this.timerStable.Tick += new System.EventHandler(this.timerStable_Tick);
+            // 
+            // tmesure
+            // 
+            this.tmesure.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.tmesure, "tmesure");
+            this.tmesure.Name = "tmesure";
+            // 
+            // calibragebutton
+            // 
+            this.calibragebutton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.calibragebutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.calibragebutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            resources.ApplyResources(this.calibragebutton, "calibragebutton");
+            this.calibragebutton.ForeColor = System.Drawing.Color.White;
+            this.calibragebutton.Name = "calibragebutton";
+            this.calibragebutton.UseVisualStyleBackColor = true;
+            this.calibragebutton.Click += new System.EventHandler(this.calibragebutton_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.Controls.Add(this.calibragebutton);
+            this.Controls.Add(this.tmesure);
             this.Controls.Add(this.indicationlabel);
             this.Controls.Add(this.modecomptagelabel);
             this.Controls.Add(this.label5);
@@ -376,6 +402,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel indicatorpanel;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerStable;
+        private System.Windows.Forms.Label tmesure;
+        private System.Windows.Forms.Button calibragebutton;
     }
 }
 

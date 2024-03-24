@@ -14,3 +14,19 @@ C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI_Arduino.Form
 C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI_Arduino.Form1.en.resources
 C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\aa-DJ\GUI Arduino.resources.dll
 C:\Users\Anthony\source\repos\GUI Arduino\GUI Arduino\obj\Debug\en\GUI Arduino.resources.dll
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\bin\Debug\GUI Arduino.exe.config
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\bin\Debug\GUI Arduino.exe
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.csproj.AssemblyReference.cache
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI_Arduino.Form1.resources
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI_Arduino.Properties.Resources.resources
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI_Arduino.Form1.aa-DJ.resources
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI_Arduino.Form1.en.resources
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.csproj.GenerateResource.cache
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.csproj.CoreCompileInputs.cache
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\aa-DJ\GUI Arduino.resources.dll
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\en\GUI Arduino.resources.dll
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.exe
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\obj\Debug\GUI Arduino.pdb
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\bin\Debug\GUI Arduino.pdb
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\bin\Debug\aa-DJ\GUI Arduino.resources.dll
+C:\Users\anthy\source\repos\GUI Arduino\GUI Arduino\bin\Debug\en\GUI Arduino.resources.dll

@@ -23,6 +23,9 @@ namespace GUI_Arduino
         private bool etalonnage = false;
         private bool tarageDone = false;
         private int pesebtn = 0;
+        private DateTime startTime;
+        private Color lastcall;
+        private bool etalonnageDone = false;
         public delegate void d1(string indata);
 
         // Définition des masses moyennes pour chaque type de pièces en grammes
@@ -197,14 +200,22 @@ namespace GUI_Arduino
                         break;
                     case "STAB":
                         string dataStab = indata.Substring(4);
+                        lastcall = indicatorpanel.BackColor;
                         if (dataStab.Contains("instable"))
                         {
                             indicatorpanel.BackColor = Color.Red;
+                            ChangeState();
                         }
                         else if (dataStab.Contains("stable"))
                         {
                             indicatorpanel.BackColor = Color.Green;
+                            ChangeState();
                         }
+                        break;
+                    case "PREC":
+                        string dataPrec = indata.Substring(4);
+                        indicationlabel.ForeColor = Color.LimeGreen;
+                        indicationlabel.Text = "La précision de la balance est de" + dataPrec + "%";
                         break;
                     default:
                         break;
@@ -264,6 +275,7 @@ namespace GUI_Arduino
 
         private void fermerbutton_Click(object sender, EventArgs e)
         {
+            serialPort.Close();
             Application.Exit();
         }
 
@@ -418,11 +430,12 @@ namespace GUI_Arduino
                             break;
                         case 2:
                             serialPort.Write("G");
-                            indicationlabel.ForeColor = Color.LimeGreen;
-                            indicationlabel.Text = "Félicitations vous avez terminé l'étalonnage!";
+                            //indicationlabel.ForeColor = Color.LimeGreen;
+                            //indicationlabel.Text = "Félicitations vous avez terminé l'étalonnage!";
                             timer1.Interval = 5000;
                             timer1.Start();
                             tarageDone = false;
+                            etalonnageDone = true;
                             pesebtn = 0;
                             break;
                     }
@@ -441,6 +454,47 @@ namespace GUI_Arduino
             indicationlabel.ForeColor = Color.White;
             indicationlabel.Text = "";
             timer1.Stop();
+        }
+        private void ChangeState()
+        {
+            // Change the state here
+            // Start the timer when the state changes
+            if(lastcall != indicatorpanel.BackColor)
+            {
+                startTime = DateTime.Now;
+                timerStable.Start();
+            }
+        }
+
+        private void timerStable_Tick(object sender, EventArgs e)
+        {
+            TimeSpan elapsed = DateTime.Now - startTime;
+            //tmesure.Text = elapsed.ToString(@"hh\:mm\:ss");
+            if (indicatorpanel.BackColor == Color.Green && elapsed.TotalSeconds >= 4)
+            {
+                // Calculate tenths of a second
+                int tenths = (int)((elapsed.TotalMilliseconds % 1000) / 100);
+
+                // Format the elapsed time to include seconds and tenths of a second
+                string formattedTime = $"{elapsed.Seconds}.{tenths:0}s";
+
+                tmesure.Text = formattedTime;
+            }
+        }
+
+        private void calibragebutton_Click(object sender, EventArgs e)
+        {
+            if (etalonnageDone)
+            {
+                serialPort.Write("C");
+            }
+            else
+            {
+                indicationlabel.ForeColor = Color.Red;
+                indicationlabel.Text = "Veuillez étalonner avant de calibrer";
+                timer1.Interval = 5000;
+                timer1.Start();
+            }
         }
     }
 }
