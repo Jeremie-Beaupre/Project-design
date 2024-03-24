@@ -20,6 +20,9 @@ namespace GUI_Arduino
         private int uniteMesure = 0;
         private int modeComptage = 0;
         private float masseMain = 0;
+        private bool etalonnage = false;
+        private bool tarageDone = false;
+        private int pesebtn = 0;
         public delegate void d1(string indata);
 
         // Définition des masses moyennes pour chaque type de pièces en grammes
@@ -82,17 +85,62 @@ namespace GUI_Arduino
                 mainTextBox.Text = masse.ToString("0.0") + "e-5";
             }
         }
+        private void RefreshComPorts()
+        {
+            // Clear existing items in the ComboBox
+            comboBoxPort.Items.Clear();
+
+            // Get the current list of available COM ports
+            string[] ports = SerialPort.GetPortNames();
+
+            // Add each port to the ComboBox
+            foreach (string port in ports)
+            {
+                comboBoxPort.Items.Add(port);
+            }
+        }
 
         private void tareButton_Click(object sender, EventArgs e)
         {
-            //Envoie de la commande à l'arduino
-            serialPort.Write("A");
+            //Envoie de la commande tarage à l'arduino
+            if(indicatorpanel.BackColor == Color.Green)
+            {
+                if (etalonnage)
+                {
+                    tarageDone = true;
+                    etalonnage = false;
+                    serialPort.Write("A");
+                    indicationlabel.ForeColor = Color.White;
+                    indicationlabel.Text = "Mettez une masse de 10g et appuyer sur peser";
+                }
+                else
+                {
+                    serialPort.Write("A");
+                    timer1.Interval = 5000;
+                    timer1.Start();
+                    indicationlabel.ForeColor = Color.LimeGreen;
+                    indicationlabel.Text = "Tarage effectué avec succès!"; // on clear les indications dans le cas d'un succes
+                }
+            }
+            else
+            {
+                timer1.Interval = 5000;
+                if (!etalonnage)
+                {
+                    timer1.Start();
+                    indicationlabel.ForeColor = Color.Red;
+                }
+                indicationlabel.Text = "Veuillez attendre que la mesure soit stable.";
+            }
         }
 
         private void calibreButton_Click(object sender, EventArgs e)
         {
             //Envoie de la commande à l'arduino
             serialPort.Write("B");
+            indicationlabel.ForeColor = Color.White;
+            indicationlabel.Text = "Mettez la balance à zéro en appuyant sur Tarage.";
+            etalonnage = true;
         }
 
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
@@ -107,7 +155,6 @@ namespace GUI_Arduino
             catch (IOException ex)
             {
                 // Handle the IOException gracefully
-                indicationlabel.Text = "L'arduino a été déconnecté" + ex.Message;
                 // Optionally, you can close and reopen the serial port, or perform other cleanup tasks
             }
         }
@@ -143,12 +190,20 @@ namespace GUI_Arduino
                             float kp = float.Parse(values[0]);
                             float ki = float.Parse(values[1]);
                             float kd = float.Parse(values[2]);
-                            //textBoxKp.Text = values[0];
-                            //textBoxKi.Text = values[1];
-                            //textBoxKd.Text = values[2];
                             textBoxKp.Text = kp.ToString("F5");
                             textBoxKi.Text = ki.ToString("F5");
                             textBoxKd.Text = kd.ToString("F5");
+                        }
+                        break;
+                    case "STAB":
+                        string dataStab = indata.Substring(4);
+                        if (dataStab.Contains("instable"))
+                        {
+                            indicatorpanel.BackColor = Color.Red;
+                        }
+                        else if (dataStab.Contains("stable"))
+                        {
+                            indicatorpanel.BackColor = Color.Green;
                         }
                         break;
                     default:
@@ -239,43 +294,64 @@ namespace GUI_Arduino
         private void comptagebutton_Click(object sender, EventArgs e)
         {
             //Mettre un condition seulement si on est stable et selected mode
-            string key = comptagecomboBox.SelectedItem.ToString();
-            switch (key)
+            if (comptagecomboBox.SelectedIndex != -1)
             {
-                case "Estimer":
-                    double val = CalculerValeurMonetaireEstime((double)masseMain);
-                    comptagetextBox.Text = val.ToString("0.00") + "$";
-                    break;
-                case "1¢":
-                    int res = (int) (masseMain / masseMoyParPieces[key]);
-                    float val1 = res * (float)valeurParPieces[key];
-                    comptagetextBox.Text = $"{val1.ToString("0.00")}$ ({res} pièces de 1¢)";
-                    break;
-                case "5¢":
-                    int res2 = (int)(masseMain / masseMoyParPieces[key]);
-                    float val2 = res2 * (float)valeurParPieces[key];
-                    comptagetextBox.Text = $"{val2.ToString("0.00")}$ ({res2} pièces de {key})";
-                    break;
-                case "10¢":
-                    int res3 = (int)(masseMain / masseMoyParPieces[key]);
-                    float val3 = res3 * (float)valeurParPieces[key];
-                    comptagetextBox.Text = $"{val3.ToString("0.00")}$ ({res3} pièces de {key})";
-                    break;
-                case "25¢":
-                    int res4 = (int)(masseMain / masseMoyParPieces[key]);
-                    float val4 = res4 * (float)valeurParPieces[key];
-                    comptagetextBox.Text = $"{val4.ToString("0.00")}$ ({res4} pièces de {key})";
-                    break;
-                case "1$":
-                    int res5 = (int)(masseMain / masseMoyParPieces[key]);
-                    float val5 = res5 * (float)valeurParPieces[key];
-                    comptagetextBox.Text = $"{val5.ToString("0.00")}$ ({res5} pièces de {key})";
-                    break;
-                case "2$":
-                    int res6 = (int)(masseMain / masseMoyParPieces[key]);
-                    float val6 = res6 * (float)valeurParPieces[key];
-                    comptagetextBox.Text = $"{val6.ToString("0.00")}$ ({res6} pièces de {key})";
-                    break;
+                if (indicatorpanel.BackColor == Color.Green)
+                {
+                    indicationlabel.Text = ""; // On clear le label d'information
+                    string key = comptagecomboBox.SelectedItem.ToString();
+                    switch (key)
+                    {
+                        case "Estimer":
+                            double val = CalculerValeurMonetaireEstime((double)masseMain);
+                            comptagetextBox.Text = val.ToString("0.00") + "$";
+                            break;
+                        case "1¢":
+                            int res = (int)(masseMain / masseMoyParPieces[key]);
+                            float val1 = res * (float)valeurParPieces[key];
+                            comptagetextBox.Text = $"{val1.ToString("0.00")}$ ({res} pièces de 1¢)";
+                            break;
+                        case "5¢":
+                            int res2 = (int)(masseMain / masseMoyParPieces[key]);
+                            float val2 = res2 * (float)valeurParPieces[key];
+                            comptagetextBox.Text = $"{val2.ToString("0.00")}$ ({res2} pièces de {key})";
+                            break;
+                        case "10¢":
+                            int res3 = (int)(masseMain / masseMoyParPieces[key]);
+                            float val3 = res3 * (float)valeurParPieces[key];
+                            comptagetextBox.Text = $"{val3.ToString("0.00")}$ ({res3} pièces de {key})";
+                            break;
+                        case "25¢":
+                            int res4 = (int)(masseMain / masseMoyParPieces[key]);
+                            float val4 = res4 * (float)valeurParPieces[key];
+                            comptagetextBox.Text = $"{val4.ToString("0.00")}$ ({res4} pièces de {key})";
+                            break;
+                        case "1$":
+                            int res5 = (int)(masseMain / masseMoyParPieces[key]);
+                            float val5 = res5 * (float)valeurParPieces[key];
+                            comptagetextBox.Text = $"{val5.ToString("0.00")}$ ({res5} pièces de {key})";
+                            break;
+                        case "2$":
+                            int res6 = (int)(masseMain / masseMoyParPieces[key]);
+                            float val6 = res6 * (float)valeurParPieces[key];
+                            comptagetextBox.Text = $"{val6.ToString("0.00")}$ ({res6} pièces de {key})";
+                            break;
+                    }
+                }
+                else
+                {
+                    timer1.Interval = 5000;
+                    timer1.Start();
+                    indicationlabel.ForeColor = Color.Red;
+                    indicationlabel.Text = "Veuillez attendre que la mesure soit stable!";
+                }
+            }
+            else
+            {
+                timer1.Interval = 5000;
+                timer1.Start();
+                indicationlabel.ForeColor = Color.Red;
+                indicationlabel.Text = "Veuillez sélectionnez un mode de comptage!";
             }
         }
 
@@ -308,6 +384,63 @@ namespace GUI_Arduino
                     modeComptage = 0;
                     break;
             }
+        }
+
+        private void comboBoxPort_DropDown(object sender, EventArgs e)
+        {
+            RefreshComPorts();
+        }
+
+        private void mainTextBox_Enter(object sender, EventArgs e)
+        {
+            indicationlabel.Focus();
+        }
+
+        private void peseButton_Click(object sender, EventArgs e)
+        {
+            if(indicatorpanel.BackColor == Color.Green)
+            {
+                if (tarageDone)
+                {
+                    switch (pesebtn)
+                    {
+                        case 0:
+                            serialPort.Write("E");
+                            indicationlabel.ForeColor = Color.White;
+                            indicationlabel.Text = "Mettez une masse de 20g et appuyer sur peser";
+                            pesebtn++;
+                            break;
+                        case 1:
+                            serialPort.Write("F");
+                            indicationlabel.ForeColor = Color.White;
+                            indicationlabel.Text = "Mettez une masse de 50g et appuyer sur peser";
+                            pesebtn++;
+                            break;
+                        case 2:
+                            serialPort.Write("G");
+                            indicationlabel.ForeColor = Color.LimeGreen;
+                            indicationlabel.Text = "Félicitations vous avez terminé l'étalonnage!";
+                            timer1.Interval = 5000;
+                            timer1.Start();
+                            tarageDone = false;
+                            pesebtn = 0;
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                indicationlabel.ForeColor = Color.Red;
+                indicationlabel.Text = "Attendez que la valeur soit stable avant de continuer!";
+            }
+            
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            indicationlabel.ForeColor = Color.White;
+            indicationlabel.Text = "";
+            timer1.Stop();
         }
     }
 }

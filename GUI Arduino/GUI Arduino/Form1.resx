@@ -145,7 +145,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tareButton.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <metadata name="serialPort.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -175,10 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;calibreButton.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="mainTextBox.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>12</value>
   </data>
   <data name="mainTextBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Digital-7 Mono, 36pt, style=Bold</value>
@@ -189,11 +186,8 @@
   <data name="mainTextBox.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>400, 400</value>
   </data>
-  <data name="mainTextBox.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="mainTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 57</value>
+    <value>226, 55</value>
   </data>
   <data name="mainTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -211,7 +205,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mainTextBox.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="peseButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -238,7 +232,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;peseButton.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="comboBoxPort.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 23</value>
@@ -391,7 +385,7 @@
     <value>167, 565</value>
   </data>
   <data name="groupBoxMenuExpert.Size" type="System.Drawing.Size, System.Drawing">
-    <value>342, 100</value>
+    <value>344, 100</value>
   </data>
   <data name="groupBoxMenuExpert.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -412,10 +406,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBoxMenuExpert.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="buttonApliquer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 71</value>
+    <value>193, 67</value>
   </data>
   <data name="buttonApliquer.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -442,7 +436,7 @@
     <value>True</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 29</value>
+    <value>274, 25</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 13</value>
@@ -469,7 +463,7 @@
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 29</value>
+    <value>163, 25</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>15, 13</value>
@@ -496,7 +490,7 @@
     <value>True</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 29</value>
+    <value>60, 25</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 13</value>
@@ -520,7 +514,7 @@
     <value>3</value>
   </data>
   <data name="textBoxKd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 45</value>
+    <value>231, 41</value>
   </data>
   <data name="textBoxKd.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -541,7 +535,7 @@
     <value>4</value>
   </data>
   <data name="textBoxKi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 45</value>
+    <value>125, 41</value>
   </data>
   <data name="textBoxKi.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -562,7 +556,7 @@
     <value>5</value>
   </data>
   <data name="textBoxKp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 45</value>
+    <value>19, 41</value>
   </data>
   <data name="textBoxKp.MaxLength" type="System.Int32, mscorlib">
     <value>7</value>
@@ -586,7 +580,7 @@
     <value>6</value>
   </data>
   <data name="buttonActualiser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 71</value>
+    <value>63, 67</value>
   </data>
   <data name="buttonActualiser.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -646,7 +640,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="fermerbutton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -762,7 +756,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comptagecomboBox.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="massecomboBox.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -798,27 +792,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;massecomboBox.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="progressBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 294</value>
-  </data>
-  <data name="progressBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>342, 23</value>
-  </data>
-  <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
-    <value>progressBar1</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="comptagebutton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
@@ -855,7 +828,7 @@
     <value>False</value>
   </data>
   <data name="comptagetextBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Digital-7 Mono, 36pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 18pt, style=Bold</value>
   </data>
   <data name="comptagetextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>167, 442</value>
@@ -969,25 +942,25 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="indicationlabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>13</value>
   </data>
   <data name="indicationlabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold, Italic, Underline</value>
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold, Italic</value>
   </data>
   <data name="indicationlabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 329</value>
+    <value>164, 305</value>
   </data>
   <data name="indicationlabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 13</value>
+    <value>347, 25</value>
   </data>
   <data name="indicationlabel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="indicationlabel.Text" xml:space="preserve">
     <value>indication</value>
+  </data>
+  <data name="indicationlabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;indicationlabel.Name" xml:space="preserve">
     <value>indicationlabel</value>
@@ -1004,7 +977,7 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAaRFJREFUeF7tvQfUNFtVrY1KzjmjklRyVFFRMSsYUaIgihH1gmIClSzhEkQEJIqi
+        DwAACw8BkvkDpQAAaRFJREFUeF7tvQfUNFtVrY1KzjmjklRyVFFRMSsYUaIgihH1gmIClSzhEkQEJIqi
         BFFQFMNVBBUElByMSJQcDnAVScp///mc803Ook6/3RW7q6vmM8Yc/Ybqql17rb3Wql3pbCGEEEIIIYQQ
         QgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQ
         QgghhMJnSJ8pnf3U5y7qsnw3hBBCCEfEZ0knJfxzSueVLnBK/MzfNkERwLpSDIQQQggzxcm6cmHpxtJP
@@ -1479,6 +1452,33 @@
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="indicatorpanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 159</value>
+  </data>
+  <data name="indicatorpanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="indicatorpanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 60</value>
+  </data>
+  <data name="indicatorpanel.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;indicatorpanel.Name" xml:space="preserve">
+    <value>indicatorpanel</value>
+  </data>
+  <data name="&gt;&gt;indicatorpanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;indicatorpanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;indicatorpanel.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>120, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1601,6 +1601,12 @@
   </data>
   <data name="&gt;&gt;serialPort.Type" xml:space="preserve">
     <value>System.IO.Ports.SerialPort, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;timer1.Name" xml:space="preserve">
+    <value>timer1</value>
+  </data>
+  <data name="&gt;&gt;timer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Form1</value>

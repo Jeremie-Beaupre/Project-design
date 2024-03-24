@@ -51,7 +51,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comptagecomboBox = new System.Windows.Forms.ComboBox();
             this.massecomboBox = new System.Windows.Forms.ComboBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.comptagebutton = new System.Windows.Forms.Button();
             this.comptagetextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -59,6 +58,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.indicationlabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.indicatorpanel = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBoxMenuExpert.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -99,6 +100,7 @@
             this.mainTextBox.ForeColor = System.Drawing.Color.White;
             this.mainTextBox.Name = "mainTextBox";
             this.mainTextBox.ReadOnly = true;
+            this.mainTextBox.Enter += new System.EventHandler(this.mainTextBox_Enter);
             // 
             // peseButton
             // 
@@ -109,13 +111,16 @@
             this.peseButton.ForeColor = System.Drawing.Color.White;
             this.peseButton.Name = "peseButton";
             this.peseButton.UseVisualStyleBackColor = true;
+            this.peseButton.Click += new System.EventHandler(this.peseButton_Click);
             // 
             // comboBoxPort
             // 
+            this.comboBoxPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPort.ForeColor = System.Drawing.Color.Black;
             this.comboBoxPort.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxPort, "comboBoxPort");
             this.comboBoxPort.Name = "comboBoxPort";
+            this.comboBoxPort.DropDown += new System.EventHandler(this.comboBoxPort_DropDown);
             this.comboBoxPort.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // checkBoxMenuExpert
@@ -242,11 +247,6 @@
             this.massecomboBox.Name = "massecomboBox";
             this.massecomboBox.SelectedIndexChanged += new System.EventHandler(this.massecomboBox_SelectedIndexChanged);
             // 
-            // progressBar1
-            // 
-            resources.ApplyResources(this.progressBar1, "progressBar1");
-            this.progressBar1.Name = "progressBar1";
-            // 
             // comptagebutton
             // 
             this.comptagebutton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -287,6 +287,7 @@
             // 
             // indicationlabel
             // 
+            this.indicationlabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(53)))), ((int)(((byte)(71)))));
             resources.ApplyResources(this.indicationlabel, "indicationlabel");
             this.indicationlabel.ForeColor = System.Drawing.Color.Red;
             this.indicationlabel.Name = "indicationlabel";
@@ -296,6 +297,16 @@
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
+            // 
+            // indicatorpanel
+            // 
+            this.indicatorpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            resources.ApplyResources(this.indicatorpanel, "indicatorpanel");
+            this.indicatorpanel.Name = "indicatorpanel";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -307,7 +318,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comptagetextBox);
             this.Controls.Add(this.comptagebutton);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.massecomboBox);
             this.Controls.Add(this.comptagecomboBox);
             this.Controls.Add(this.panel1);
@@ -317,6 +327,7 @@
             this.Controls.Add(this.tareButton);
             this.Controls.Add(this.calibreButton);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.indicatorpanel);
             this.Controls.Add(this.pictureBox1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -354,7 +365,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox massecomboBox;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ComboBox comptagecomboBox;
         private System.Windows.Forms.Button fermerbutton;
         private System.Windows.Forms.Button comptagebutton;
@@ -364,6 +374,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label indicationlabel;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel indicatorpanel;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
